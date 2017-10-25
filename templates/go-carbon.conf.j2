@@ -1,0 +1,13 @@
+#jinja2: lstrip_blocks: True
+# TOML configuration for go-carbon server.
+# See details here: https://github.com/toml-lang/toml
+#
+# Detailed overview for all allowed parameters see here: https://github.com/lomik/go-carbon
+#
+# {{ ansible_managed }}
+#
+
+{% from 'macro/toml.j2' import to_toml with context -%}
+
+############################ Go-carbon configuration #############################
+{{ to_toml(graphite.carbon.options, '') }}

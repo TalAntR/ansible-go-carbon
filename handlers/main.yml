@@ -1,0 +1,5 @@
+---
+
+- name: restart go-carbon
+  service: name={{ graphite.carbon.daemon }} state=restarted
+  become: true

@@ -1,0 +1,10 @@
+---
+
+- name: install packages
+  package: name={{ item }}
+           update_cache=yes
+           state=present
+  with_items: "{{ svc.providers.pkg.packages | select | list }}"
+
+- name: enable autostart on boot
+  service: name={{ svc.daemon }} enabled=yes

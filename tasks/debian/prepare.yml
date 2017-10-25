@@ -1,0 +1,15 @@
+---
+
+- name: add GPG keys for repositories
+  apt_key: url={{ item }} state=present
+  with_items: "{{ svc.providers.pkg.repositories.values() | map(attribute='keys') | sum(start=[]) | unique | list }}"
+  when: ansible_pkg_mgr == "apt"
+
+
+- name: add repositories
+  apt_repository: repo="deb {{ item }}"
+                  filename="{{ collectd.service.name }}"
+                  state=present
+  with_items: "{{ svc.providers.pkg.repositories.values() | map(attribute='url') | unique | list }}"
+  when: ansible_pkg_mgr == "apt"
+

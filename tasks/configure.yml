@@ -1,0 +1,13 @@
+---
+
+- name: deliver config files
+  template: src={{ item }}.j2
+            dest={{ graphite.carbon.conf }}/{{ item }}
+            owner={{ graphite.carbon.owner }}
+            group={{ graphite.carbon.owner }}
+            mode=0640
+  with_items:
+    - storage-schemas.conf
+    - storage-aggregation.conf
+    - go-carbon.conf
+  notify: restart go-carbon

@@ -1,0 +1,16 @@
+---
+
+graphite:
+  carbon:
+    # Define settings for APT repository
+    providers:
+      # Configuration settings and packages for Debian-based Linux
+      pkg:
+        delim: "="
+        repositories: {}
+
+        # Apt packages which are installed on prepare phase
+        prerequisites: []
+
+        packages:
+          - https://github.com/lomik/go-carbon/releases/download/v{{ graphite.carbon.version }}/go-carbon_{{ graphite.carbon.version }}_{{ ansible_machine }}.deb
